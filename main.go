@@ -20,9 +20,9 @@ import (
 const defaultSuffix = ".preview.jpg"
 
 var (
-	flagOutfile   = pflag.StringP("output", "o", "", fmt.Sprintf("Output filename. Default: input file + \"%s\"", defaultSuffix))
-	flagThumbnail = pflag.BoolP("thumbnail", "t", false, "Extract thumbnail instead of preview (preview is a larger, more detailed image, if present)")
-	flagResize    = pflag.StringP("resize", "r", "", "Resize the output image. The format is [W[x[H]]] where W is width, H is height. Empty string: no resize. 'W' or 'Wx' resize width to W, maintaining the aspect ratio. WxH changes both width and height")
+	flagOutfile = pflag.StringP("output", "o", "", fmt.Sprintf("Output filename. Default: input file + \"%s\"", defaultSuffix))
+	flagPreview = pflag.BoolP("preview", "p", false, "Extract preview instead of thumbnail (preview is a larger, more detailed image, if present)")
+	flagResize  = pflag.StringP("resize", "r", "", "Resize the output image. The format is [W[x[H]]] where W is width, H is height. Empty string: no resize. 'W' or 'Wx' resize width to W, maintaining the aspect ratio. WxH changes both width and height")
 )
 
 // parseResize parses a resize string of the format [W[x[H]]] where W and H are
@@ -93,7 +93,7 @@ func main() {
 		log.Fatal(err)
 	}
 	var im []byte
-	if !*flagThumbnail {
+	if *flagPreview {
 		log.Fatal("PreviewImage not supported yet")
 		// TODO add support for PreviewImage TIFF tag (extension)
 		//tag, err := x.Get(exif.Preview)
