@@ -1,0 +1,4 @@
+[Thumbnailer Entry]
+TryExec=arwthumbnailer
+Exec=arwthumbnailer %i -o %o -r %s -t
+MimeType=image/x-sony-arw
